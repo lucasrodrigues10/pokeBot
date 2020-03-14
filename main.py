@@ -17,7 +17,7 @@ TELEGRAM_BOT_TOKEN = '921718883:AAGXDn3YNT-trE5j1Kbljkk4iiYfPr84L3Y'
 DEFAULT_POKEMON = 1
 
 
-def get_sprite(pokemon_id = None, pokemon_name = None):
+def get_sprite(pokemon_id=None, pokemon_name=None):
     method = 'pokemon/{}'
     if pokemon_id:
         method = method.format(pokemon_id)
@@ -60,7 +60,8 @@ def get_pokemon(update, context):
 
     caption += ('shiny ' if pokemon_data['is_shiny'] else '') + pokemon_data['name']
 
-    context.bot.send_photo(chat_id=update.effective_chat.id, photo=pokemon_data['url'], caption=caption)
+    context.bot.send_photo(chat_id=update.effective_chat.id, photo=pokemon_data['url'],
+                           caption=caption)
 
 
 # print(get_sprite(pokemon_random_id))

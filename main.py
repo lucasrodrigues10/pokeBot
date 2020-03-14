@@ -56,7 +56,7 @@ def get_pokemon(update, context):
         pokemon_data = get_sprite(pokemon_name=pokedex_reference)
         if not pokemon_data:
             pokemon_data = get_sprite(pokemon_id=DEFAULT_POKEMON)
-            caption = 'you named no pokemon, so here we got a '
+            caption = 'you named no valid pokemon, so here we got a '
 
     caption += ('shiny ' if pokemon_data['is_shiny'] else '') + pokemon_data['name']
 

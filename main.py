@@ -16,6 +16,7 @@ POKEMON_API_URL = 'https://pokeapi.co/api/v2/'
 TELEGRAM_BOT_TOKEN = '921718883:AAGXDn3YNT-trE5j1Kbljkk4iiYfPr84L3Y'
 DEFAULT_POKEMON = 1
 
+
 def get_sprite(pokemon_id = None, pokemon_name = None):
     method = 'pokemon/{}'
     if pokemon_id:
@@ -35,6 +36,7 @@ def get_sprite(pokemon_id = None, pokemon_name = None):
     sprite_name = pokemon_data['name']
     return {'url': sprite_url, 'name': sprite_name, 'is_shiny': is_shiny}
 
+
 def do_request(url):
     try:
         req = requests.get(url)
@@ -50,15 +52,16 @@ def get_pokemon(update, context):
     try:
         pokemon_id = int(pokedex_reference)
         pokemon_data = get_sprite(pokemon_id)
+        caption += 'you got a '
     except ValueError:
         pokemon_data = get_sprite(pokemon_name=pokedex_reference)
         if not pokemon_data:
             pokemon_data = get_sprite(pokemon_id=DEFAULT_POKEMON)
             caption += 'you named no pokemon, so here we got a '
 
+    caption += ('shiny ' if pokemon_data['is_shiny'] else '') + pokemon_data['name']
 
-    context.bot.send_photo(chat_id=update.effective_chat.id, photo=pokemon_data['url'],
-                           caption=caption+pokemon_data['name'])
+    context.bot.send_photo(chat_id=update.effective_chat.id, photo=pokemon_data['url'], caption=caption)
 
 
 # print(get_sprite(pokemon_random_id))

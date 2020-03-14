@@ -47,17 +47,16 @@ def do_request(url):
 
 
 def get_pokemon(update, context):
-    caption = ''
+    caption = 'you got a '
     pokedex_reference = context.args[0] if context.args else random.randint(0, 500)
     try:
         pokemon_id = int(pokedex_reference)
         pokemon_data = get_sprite(pokemon_id)
-        caption += 'you got a '
     except ValueError:
         pokemon_data = get_sprite(pokemon_name=pokedex_reference)
         if not pokemon_data:
             pokemon_data = get_sprite(pokemon_id=DEFAULT_POKEMON)
-            caption += 'you named no pokemon, so here we got a '
+            caption = 'you named no pokemon, so here we got a '
 
     caption += ('shiny ' if pokemon_data['is_shiny'] else '') + pokemon_data['name']
 

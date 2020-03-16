@@ -30,7 +30,7 @@ def get_sprite(pokemon_id = None, pokemon_name = None):
     if pokemon_data is None:
         return
 
-    is_shiny = random.randint(0, 1)
+    is_shiny = random.randint(0, 9) == 9
     sprite_key = 'front_shiny' if is_shiny else 'front_default'
     sprite_url = pokemon_data['sprites'][sprite_key]
     sprite_name = pokemon_data['name']
